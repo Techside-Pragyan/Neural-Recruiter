@@ -13,6 +13,9 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+import interviewRoutes from './routes/interviewRoutes';
+app.use('/api/interviews', interviewRoutes);
+
 app.get('/', (req, res) => {
   res.send('AI Interview Simulator API is running...');
 });
