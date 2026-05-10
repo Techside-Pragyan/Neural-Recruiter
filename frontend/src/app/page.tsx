@@ -1,65 +1,95 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import { Bot, Sparkles, Target, Activity, ChevronRight, Play } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Background gradients */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-indigo-600/20 rounded-full blur-[120px]" />
+        <div className="absolute top-[20%] right-[-10%] w-[40%] h-[60%] bg-purple-600/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-20%] left-[20%] w-[60%] h-[50%] bg-blue-600/20 rounded-full blur-[120px]" />
+      </div>
+
+      <main className="container mx-auto px-6 pt-32 pb-24 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="inline-flex items-center space-x-2 glass-panel px-4 py-2 rounded-full mb-8 border border-indigo-500/30">
+            <Sparkles className="w-4 h-4 text-indigo-400" />
+            <span className="text-sm font-medium text-gray-300">
+              AI-Powered Interview Preparation
+            </span>
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8">
+            Master Your Next Interview with <br className="hidden md:block" />
+            <span className="text-gradient">AI Intelligence</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Practice real-world interviews with our advanced AI. Get instant, personalized feedback, detailed performance analytics, and boost your confidence before the big day.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/dashboard">
+              <button className="group relative px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full font-semibold text-lg transition-all shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)] flex items-center gap-2">
+                Start Practicing
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
+            <Link href="#how-it-works">
+              <button className="px-8 py-4 glass-panel hover:bg-white/5 text-white rounded-full font-semibold text-lg transition-all flex items-center gap-2">
+                <Play className="w-5 h-5" />
+                See How It Works
+              </button>
+            </Link>
+          </div>
+        </motion.div>
+
+        {/* Features Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="grid md:grid-cols-3 gap-8 mt-32"
+        >
+          <FeatureCard 
+            icon={<Bot className="w-8 h-8 text-indigo-400" />}
+            title="Smart AI Interviewer"
+            description="Our AI adapts to your responses, asking intelligent follow-up questions just like a real human interviewer."
+          />
+          <FeatureCard 
+            icon={<Target className="w-8 h-8 text-purple-400" />}
+            title="Role-Specific Practice"
+            description="Choose from dozens of roles including Software Engineering, Data Science, HR, and custom domains."
+          />
+          <FeatureCard 
+            icon={<Activity className="w-8 h-8 text-blue-400" />}
+            title="Real-Time Analytics"
+            description="Get detailed insights on your communication skills, technical accuracy, confidence, and areas to improve."
+          />
+        </motion.div>
       </main>
+    </div>
+  );
+}
+
+function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
+  return (
+    <div className="glass-card p-8 rounded-2xl text-left hover:-translate-y-2 transition-transform duration-300">
+      <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-6">
+        {icon}
+      </div>
+      <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
+      <p className="text-gray-400 leading-relaxed">{description}</p>
     </div>
   );
 }
